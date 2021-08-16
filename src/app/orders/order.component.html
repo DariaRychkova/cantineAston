@@ -1,0 +1,33 @@
+<p>Commande en cours</p>
+<div
+  class="row"
+  *ngFor="let order of orders; let i = index"
+  style="margin-top: 10px"
+>
+  <!-- controls is a getter (get controls) -->
+  <div class="col-6 d-flex align-items-center">
+    {{ order.mealLabel }}
+  </div>
+  <div class="col-2 d-flex align-items-center">
+    {{ order.mealQuantity }}
+  </div>
+  <div class="col-2 d-flex align-items-center">
+    {{ order.mealPrice }}&nbsp;€
+  </div>
+  <div class="col-2 d-flex align-items-center">
+    <button
+      type="button"
+      class="btn btn-danger"
+      (click)="onDeleteMeal(i)"
+    >
+      Supprimer
+    </button>
+  </div>
+</div>
+<hr />
+<button class="btn btn-success" type="button" (click)="onSendOrders()">
+  Valider la commande
+</button>
+<!-- <button class="btn btn-danger" type="button" (click)="deleteAllIngredients()">
+  Delete Ingredients
+</button> -->

@@ -1,0 +1,78 @@
+<div class="row">
+  <div class="col-sm-4 pb-5" *ngFor="let jour of jours; let i=index;">
+    <div class="card" style="width: 300px">
+      <img
+        src="../../assets/images/menu.png"
+        class="card-img-top"
+        alt="Menu {{ jour }}"
+      />
+      <div class="card-body">
+        <h5 class="card-title">Menu {{ jour | uppercase }}</h5>
+        <p class="card-text">Voir les plats du jour !</p>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          [attr.data-bs-target]="'#' + jour"
+        >
+          Consulter
+        </button>
+      </div>
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="{{ jour }}"
+        tabindex="-1"
+        aria-labelledby="{{ jour }}"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="{{ jour }}">
+                Menu {{ jour | uppercase }}
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Fermer"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <!----------------------  Les plats ---------------------->
+              <app-plat-item
+                *ngFor="let platElement of plats; let i = index"
+                [plat]="platElement"
+                [index]="i"
+              >
+              </app-plat-item>
+              <!-------------------------------------------------------->
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Fermer
+              </button>
+              <button type="button" class="btn btn-primary" *ngIf="i != 0" 
+                data-bs-toggle="modal"
+                data-bs-dismiss="modal"
+                [attr.data-bs-target]="'#' + jours[i-1]">
+                Jour précedent
+              </button>
+              <button type="button" class="btn btn-primary" *ngIf="i != 4" 
+                data-bs-toggle="modal"
+                data-bs-dismiss="modal"
+                [attr.data-bs-target]="'#' + jours[i+1]">
+                Jour suivant
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

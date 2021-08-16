@@ -1,0 +1,79 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container-fluid">
+    <div class="navbar-brand">
+      <button
+        type="button"
+        class="navbar-toggler"
+        (click)="collapsed = !collapsed"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a routerLink="/" class="navbar-brand">
+        <img
+          src="../../assets/images/logo_small.png"
+          alt="Logo Entreprise"
+          height="100px"
+        />
+      </a>
+    </div>
+    <!-- (window:resize)="collapsed = true" => If the menu is expanded + window resizes => menu collapses -->
+    <div
+      class="navbar-collapse"
+      [class.collapse]="collapsed"
+      (window:resize)="collapsed = true"
+    >
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item" routerLinkActive="active" *ngIf="isAuthenticated && isLunchLady">
+          <a class="nav-link" routerLink="">Recap des commandes</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="">Plats de la semaine</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="">Carte</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" *ngIf="isAuthenticated">
+          <a class="nav-link" routerLink="">Compte utilisateur</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" *ngIf="isAuthenticated && isLunchLady">
+          <a class="nav-link" routerLink="">Configuration</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" style="cursor: pointer" routerLink="/orders">
+            <fa-icon [icon]="faCartPlus" size="lg"></fa-icon>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="!isAuthenticated">
+          <a class="nav-link" style="cursor: pointer" routerLink="/auth">Se connecter</a>
+        </li>
+        <li class="nav-item" *ngIf="isAuthenticated">
+          <a class="nav-link" style="cursor: pointer" (click)="onLogout()">Log out</a>
+        </li>
+        <!-- Use own directive -->
+        <!-- <li class="nav-item dropdown">
+          <a
+            style="cursor: pointer"
+            class="nav-link dropdown-toggle"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            id="navbarDropdown"
+            >Manage<span class="caret"></span
+          ></a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a class="dropdown-item" style="cursor: pointer"
+                >Save Data To Firebase</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" style="cursor: pointer">Fetch Data</a>
+            </li>
+          </ul>
+        </li> -->
+      </ul>
+    </div>
+  </div>
+</nav>

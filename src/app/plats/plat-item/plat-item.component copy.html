@@ -1,0 +1,42 @@
+<h4 class="list-group-item-heading">{{ plat.label }}</h4>
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let meal of plat.meals">
+    <form
+      class="row g-3 align-items-center"
+      (ngSubmit)="rajouterAuPanier(f)"
+      #f="ngForm"
+    >
+      <input 
+        type="hidden" 
+        name="meal_id" 
+        [ngModel] = "meal.id" />
+        <input 
+        type="hidden" 
+        name="meal_label" 
+        [ngModel] = "meal.label" />
+        <input 
+        type="hidden" 
+        name="meal_price" 
+        [ngModel] = "meal.priceDF" />
+      <div class="col-sm-8">
+        <label for="amount" class="col-form-label">{{ meal.label }} ({{ meal.priceDF }} €)</label>
+      </div>
+      <div class="col-sm-2">
+        <input
+          type="number"
+          id="amount"
+          class="form-control"
+          name="amount"
+          required
+          pattern="^[1-9]+[0-9]*$"
+          ngModel
+        />
+      </div>
+      <div class="col-sm-2">
+        <button type="submit" class="btn btn-primary">
+          <fa-icon [icon]="faCartPlus"></fa-icon>
+        </button>
+      </div>
+    </form>
+  </li>
+</ul>
